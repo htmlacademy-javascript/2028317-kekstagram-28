@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Юлия Сенчакова](https://up.htmlacademy.ru/javascript/28/user/2028317).
-* Наставник: `Неизвестно`.
+* Наставник: [Алина Вишнякова] (https://htmlacademy.ru/profile/malina_ve).
 
 ---
 
