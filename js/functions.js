@@ -2,9 +2,9 @@ function checkStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 
-// console.log(checkStringLength('проверяемая строка', 20));
-// console.log(checkStringLength('проверяемая строка', 18));
-// console.log(checkStringLength('проверяемая строка', 10));
+checkStringLength('проверяемая строка', 20);
+checkStringLength('проверяемая строка', 18);
+checkStringLength('проверяемая строка', 10);
 
 function checkIfStringIsPalindrome(string) {
   let isPalindrome = true;
@@ -23,10 +23,10 @@ function checkIfStringIsPalindrome(string) {
   return isPalindrome;
 }
 
-// console.log(checkIfStringIsPalindrome('топот'));
-// console.log(checkIfStringIsPalindrome('ДовОд'));
-// console.log(checkIfStringIsPalindrome('Кекс'));
-// console.log(checkIfStringIsPalindrome('Лёша на полке клопа нашёл '));
+checkIfStringIsPalindrome('топот');
+checkIfStringIsPalindrome('ДовОд');
+checkIfStringIsPalindrome('Кекс');
+checkIfStringIsPalindrome('Лёша на полке клопа нашёл ');
 
 function getAllNumbersFromString(string) {
   let numbers = '';
@@ -41,15 +41,14 @@ function getAllNumbersFromString(string) {
   return numbers.length ? Number(numbers) : NaN;
 }
 
-// console.log(getAllNumbersFromString('2023 год'));
-// console.log(getAllNumbersFromString('ECMAScript 2022'));
-// console.log(getAllNumbersFromString('1 кефир, 0.5 батона'));
-// console.log(getAllNumbersFromString('агент 007'));
-// console.log(getAllNumbersFromString('а я томат'));
-// console.log(getAllNumbersFromString(2023));
-// console.log(getAllNumbersFromString(-1));
-// console.log(getAllNumbersFromString(1.5));
-
+getAllNumbersFromString('2023 год');
+getAllNumbersFromString('ECMAScript 2022');
+getAllNumbersFromString('1 кефир, 0.5 батона');
+getAllNumbersFromString('агент 007');
+getAllNumbersFromString('а я томат');
+getAllNumbersFromString(2023);
+getAllNumbersFromString(-1);
+getAllNumbersFromString(1.5);
 
 function prepareString(initialString, minLength, additionalSymbol) {
   if (initialString.length >= minLength) {
@@ -70,8 +69,8 @@ function prepareString(initialString, minLength, additionalSymbol) {
   return preparedString;
 }
 
-// console.log(prepareString('1', 2, '0'));
-// console.log(prepareString('1', 4, '0'));
-// console.log(prepareString('q', 4, 'werty'));
-// console.log(prepareString('q', 4, 'we'));
-// console.log(prepareString('qwerty', 4, '0'));
+prepareString('1', 2, '0');
+prepareString('1', 4, '0');
+prepareString('q', 4, 'werty');
+prepareString('q', 4, 'we');
+prepareString('qwerty', 4, '0');
