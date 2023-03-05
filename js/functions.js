@@ -10,11 +10,9 @@ function checkIfStringIsPalindrome(string) {
   let isPalindrome = true;
   const preparedString = string.toLowerCase().replaceAll(' ', '');
 
-  console.log(preparedString);
-
   for (let i = 0; i < preparedString.length / 2; i = i + 1) {
     if (preparedString[i] === preparedString[preparedString.length - 1 - i] && isPalindrome) {
-     isPalindrome = true;
+      isPalindrome = true;
     } else {
       isPalindrome = false;
     }
