@@ -58,7 +58,4 @@ function photoDescriptions(index) {
   };
 }
 
-const descriptions = Array.from({ length: 25 }, (_, index) => photoDescriptions(index));
-
-
-
+Array.from({ length: 25 }, (_, index) => photoDescriptions(index));
