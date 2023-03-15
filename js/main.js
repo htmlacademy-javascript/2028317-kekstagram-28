@@ -31,7 +31,7 @@ const NAMES = [
   'Вадим',
   'Галина',
   'Елена'
-]
+];
 
 function getRandomNumberFromInterval(start, end) {
   const min = Math.ceil(start);
@@ -55,11 +55,10 @@ function photoDescriptions(index) {
     description: PHOTO_DESCRIPTIONS[getRandomNumberFromInterval(0, PHOTO_DESCRIPTIONS.length - 1)],
     likes: getRandomNumberFromInterval(15, 200),
     comments: getComments(getRandomNumberFromInterval(0, 5))
-  }
+  };
 }
 
 const descriptions = Array.from({ length: 25 }, (_, index) => photoDescriptions(index));
 
-console.log(descriptions)
 
 
