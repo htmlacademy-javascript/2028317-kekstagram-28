@@ -1,3 +1,3 @@
-import { photoDescriptions } from "./utils.js";
+import { photoDescriptions } from './utils.js';
 
-Array.from({ length: 25 }, (_, index) => photoDescriptions(index))
+Array.from({ length: 25 }, (_, index) => photoDescriptions(index));
