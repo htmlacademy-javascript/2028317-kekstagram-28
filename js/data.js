@@ -1,4 +1,4 @@
-import { photoDescriptions } from "./utils.js";
+import { photoDescriptions } from './utils.js';
 
 const DESCRIPTIONS_LENGTH = 25;
 
