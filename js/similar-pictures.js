@@ -3,7 +3,6 @@ import { createPhotoDescriptions } from './data.js';
 const photoDescriptions = createPhotoDescriptions();
 
 const container = document.querySelector('.pictures.container');
-console.log(container, "container");
 const template = document.querySelector('#picture').content.querySelector('.picture');
 
 photoDescriptions.forEach((description) => {
