@@ -1,3 +1,7 @@
+import { photoDescriptions } from './utils.js';
+
+const DESCRIPTIONS_LENGTH = 25;
+
 export const PHOTO_DESCRIPTIONS = [
   'Завтрак у моря',
   'Кардиотренировка в спортзале',
@@ -32,3 +36,7 @@ export const NAMES = [
   'Галина',
   'Елена'
 ];
+
+const createPhotoDescriptions = () => Array.from({ length: DESCRIPTIONS_LENGTH }, (_, index) => photoDescriptions(index));
+
+export { createPhotoDescriptions };

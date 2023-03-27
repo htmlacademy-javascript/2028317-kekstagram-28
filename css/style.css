@@ -197,6 +197,7 @@ main {
 .picture {
   position: relative;
   line-height: 0;
+  display: block;
 }
 
 .picture__img {
