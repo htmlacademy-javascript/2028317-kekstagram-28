@@ -9,7 +9,7 @@ function getRandomNumberFromInterval(start, end) {
 function getComments(count) {
   return Array.from({ length: count }, (_, index) => ({
     id: index + 1,
-    avatar: `img/avatar-${getRandomNumberFromInterval(0, 6)}.svg`,
+    avatar: `img/avatar-${getRandomNumberFromInterval(1, 6)}.svg`,
     message: COMMENT_MESSAGES[getRandomNumberFromInterval(0, COMMENT_MESSAGES.length - 1)],
     name: NAMES[getRandomNumberFromInterval(0, NAMES.length - 1)]
   }));
