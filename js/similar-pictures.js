@@ -1,4 +1,5 @@
 import { createPhotoDescriptions } from './data.js';
+import { handlePictureClick } from './big-pictures.js';
 
 const photoDescriptions = createPhotoDescriptions();
 
@@ -10,5 +11,6 @@ photoDescriptions.forEach((description) => {
   element.querySelector('.picture__img').src = description.url;
   element.querySelector('.picture__comments').textContent = description.comments.length;
   element.querySelector('.picture__likes').textContent = description.likes;
+  element.addEventListener('click', () => handlePictureClick(description));
   container.appendChild(element);
 });
