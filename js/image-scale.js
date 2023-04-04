@@ -5,7 +5,7 @@ const increaseButton = document.querySelector('.scale__control--bigger');
 const scalableImage = document.querySelector('.img-upload__preview img');
 
 function applyScaleToImage(scale) {
-  scalableImage.setAttribute('style', `transform: scale(${scale});`);
+  scalableImage.style.transform = `scale(${scale})`;
 }
 
 function decreaseScaleValue() {

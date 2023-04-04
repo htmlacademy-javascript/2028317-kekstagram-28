@@ -19,11 +19,11 @@ let selectedFilter = '';
 noUiSlider.create(sliderElement, sliderConfig);
 
 function applyFilterToImage(filterValue) {
-  image.setAttribute('style', `filter: ${selectedFilter}(${filterValue})`);
+  image.style.filter = `${selectedFilter}(${filterValue})`;
 }
 
 function effectChange(event) {
-  image.removeAttribute('style');
+  image.style.filter = 'none';
 
   if (event.target.value === 'none') {
     sliderContainer.classList.add('hidden');
