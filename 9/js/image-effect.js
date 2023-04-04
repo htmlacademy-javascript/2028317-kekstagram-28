@@ -19,11 +19,16 @@ let selectedFilter = '';
 noUiSlider.create(sliderElement, sliderConfig);
 
 function applyFilterToImage(filterValue) {
-  image.setAttribute('style', `filter: ${selectedFilter}(${filterValue})`);
+  image.style.filter = `${selectedFilter}(${filterValue})`;
 }
 
-function effectChange(event) {
-  image.removeAttribute('style');
+function onSliderUpdate() {
+  sliderValue.value = sliderElement.noUiSlider.get();
+  applyFilterToImage(sliderElement.noUiSlider.get());
+}
+
+function onChangeEffect(event) {
+  image.style.filter = 'none';
 
   if (event.target.value === 'none') {
     sliderContainer.classList.add('hidden');
@@ -113,11 +118,8 @@ function effectChange(event) {
   }
 }
 
-sliderElement.noUiSlider.on('update', () => {
-  sliderValue.value = sliderElement.noUiSlider.get();
-  applyFilterToImage(sliderElement.noUiSlider.get());
-});
+sliderElement.noUiSlider.on('update', onSliderUpdate);
 
 effectButtons.forEach((effect) => {
-  effect.addEventListener('click', effectChange);
+  effect.addEventListener('click', onChangeEffect);
 });

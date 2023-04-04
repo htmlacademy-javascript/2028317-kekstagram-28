@@ -1,17 +1,19 @@
 const SCALE_CHANGE_STEP = 25;
+const MINIMUM_SCALE_VALUE = 25;
+const MAXIMUM_SCALE_VALUE = 100;
 const scaleValue = document.querySelector('.scale__control--value');
 const decreaseButton = document.querySelector('.scale__control--smaller');
 const increaseButton = document.querySelector('.scale__control--bigger');
 const scalableImage = document.querySelector('.img-upload__preview img');
 
 function applyScaleToImage(scale) {
-  scalableImage.setAttribute('style', `transform: scale(${scale});`);
+  scalableImage.style.transform = `scale(${scale})`;
 }
 
 function decreaseScaleValue() {
   const currentValue = parseFloat(scaleValue.value);
 
-  if (currentValue - SCALE_CHANGE_STEP < 25) {
+  if (currentValue - SCALE_CHANGE_STEP < MINIMUM_SCALE_VALUE) {
     scaleValue.value = '25%';
   } else {
     scaleValue.value = `${currentValue - SCALE_CHANGE_STEP}%`;
@@ -23,7 +25,7 @@ function decreaseScaleValue() {
 function increaseScaleValue() {
   const currentValue = parseFloat(scaleValue.value);
 
-  if (currentValue + SCALE_CHANGE_STEP > 100) {
+  if (currentValue + SCALE_CHANGE_STEP > MAXIMUM_SCALE_VALUE) {
     scaleValue.value = '100%';
   } else {
     scaleValue.value = `${currentValue + SCALE_CHANGE_STEP}%`;
