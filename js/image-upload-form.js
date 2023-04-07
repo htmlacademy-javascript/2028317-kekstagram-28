@@ -1,3 +1,5 @@
+import { resetFilterToDefault } from './image-effect.js';
+import { resetScaleToDefault } from './image-scale.js';
 import { validateHashtag, validateHashtagByContent, validateHashtagByLength, validateHashtagByUnique, validateHashtagsByCount, validateHashtagsByRegex } from './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
@@ -7,7 +9,15 @@ const uploadedImageForm = document.getElementById('upload-select-image');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
-window.onload = function () {
+const successModalTemplate = document.querySelector('#success').content;
+const successModal = successModalTemplate.querySelector('.success');
+const successModalButton = successModal.querySelector('.success__button');
+
+const errorModalTemplate = document.querySelector('#error').content;
+const errorModal = errorModalTemplate.querySelector('.error');
+const errorModalButton = errorModal.querySelector('.error__button');
+
+window.addEventListener('load', () => {
 
   const pristineConfig = {
     classTo: 'img-upload__field-wrapper',
@@ -26,11 +36,37 @@ window.onload = function () {
   pristine.addValidator(commentField, (value) => value.length <= 140, 'Длинна комментария не может составлять больше 140 символов');
 
   uploadedImageForm.addEventListener('submit', (e) => {
-    if (hashtagsInput.value && !pristine.validate()) {
-      e.preventDefault();
-    }
+    e.preventDefault();
+    fetch('https://28.javascript.pages.academy/kekstagram1', {
+      method: 'POST',
+      body: new FormData(uploadedImageForm)
+    })
+      .then(() => {
+        resetScaleToDefault();
+        resetFilterToDefault();
+        handleModalClose();
+        resetFields();
+        document.body.appendChild(successModal);
+        successModalButton.addEventListener('click', closeSuccessModal);
+        document.addEventListener('keydown', (evt) => {
+          if (evt.key === 'Escape') {
+            evt.preventDefault();
+            closeSuccessModal();
+          }
+        });
+      })
+      .catch(() => {
+        document.body.appendChild(errorModal);
+        errorModalButton.addEventListener('click', closeErrorModal);
+        document.addEventListener('keydown', (evt) => {
+          if (evt.key === 'Escape') {
+            evt.preventDefault();
+            closeErrorModal();
+          }
+        });
+      });
   });
-};
+});
 
 function closeOnEscape(evt) {
   const fieldsIsFocused = hashtagsInput === document.activeElement || commentField === document.activeElement;
@@ -51,6 +87,23 @@ function handleImageLoad() {
 function handleModalClose() {
   uploadedImageFormWrapper.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  resetScaleToDefault();
+  resetFilterToDefault();
+  handleModalClose();
+  resetFields();
+}
+
+function closeSuccessModal() {
+  successModal.classList.add('hidden');
+}
+
+function closeErrorModal() {
+  errorModal.classList.add('hidden');
+}
+
+function resetFields() {
+  hashtagsInput.value = '';
+  commentField.value = '';
   uploadInput.value = '';
 }
 
