@@ -100,6 +100,7 @@ function closeSuccessModal() {
 function closeErrorModal() {
   errorModal.classList.add('hidden');
   uploadInput.value = '';
+  document.removeEventListener('keydown');
 }
 
 function resetFields() {
