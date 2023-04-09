@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
 
   uploadedImageForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    fetch('https://28.javascript.pages.academy/kekstagram1', {
+    fetch('https://28.javascript.pages.academy/kekstagram', {
       method: 'POST',
       body: new FormData(uploadedImageForm)
     })
@@ -99,6 +99,7 @@ function closeSuccessModal() {
 
 function closeErrorModal() {
   errorModal.classList.add('hidden');
+  uploadInput.value = '';
 }
 
 function resetFields() {
