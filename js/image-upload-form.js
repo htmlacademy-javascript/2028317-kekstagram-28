@@ -18,7 +18,6 @@ const errorModal = errorModalTemplate.querySelector('.error');
 const errorModalButton = errorModal.querySelector('.error__button');
 
 window.addEventListener('load', () => {
-
   const pristineConfig = {
     classTo: 'img-upload__field-wrapper',
     errorTextParent: 'img-upload__field-wrapper'
@@ -37,39 +36,36 @@ window.addEventListener('load', () => {
 
   uploadedImageForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    fetch('https://28.javascript.pages.academy/kekstagram', {
+    if (pristine.validate()) {
+      fetch('https://28.javascript.pages.academy/kekstagram', {
       method: 'POST',
       body: new FormData(uploadedImageForm)
     })
       .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        return Promise.reject();
+        return response.ok ? Promise.resolve() : Promise.reject()
       })
-      .then(() => {
-        resetScaleToDefault();
-        resetFilterToDefault();
-        handleModalClose();
-        resetFields();
-        document.body.appendChild(successModal);
-        successModalButton.addEventListener('click', closeSuccessModal);
-        document.addEventListener('keydown', (evt) => {
-          if (evt.key === 'Escape') {
-            evt.preventDefault();
-            closeSuccessModal();
-          }
-        });
-      })
-      .catch(() => {
-        document.body.appendChild(errorModal);
-        errorModal.classList.remove('hidden');
-        errorModalButton.addEventListener('click', closeErrorModal);
-        document.addEventListener('keydown', closeErrorModalOnEscape);
-      });
+      .then(onSubmitSuccess)
+      .catch(onSubmitError);
+    }
   });
 });
+
+function onSubmitSuccess() {
+    resetScaleToDefault();
+    resetFilterToDefault();
+    handleModalClose();
+    resetFields();
+    document.body.appendChild(successModal);
+    successModalButton.addEventListener('click', closeSuccessModal);
+    document.addEventListener('keydown', closeSuccessModalOnEscape);
+}
+
+function onSubmitError() {
+  document.body.appendChild(errorModal);
+  errorModal.classList.remove('hidden');
+  errorModalButton.addEventListener('click', closeErrorModal);
+  document.addEventListener('keydown', closeErrorModalOnEscape);
+}
 
 function closeOnEscape(evt) {
   const fieldsIsFocused = hashtagsInput === document.activeElement || commentField === document.activeElement;
@@ -92,12 +88,19 @@ function handleModalClose() {
   document.body.classList.remove('modal-open');
   resetScaleToDefault();
   resetFilterToDefault();
-  handleModalClose();
   resetFields();
+}
+
+function closeSuccessModalOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeSuccessModal();
+  }
 }
 
 function closeSuccessModal() {
   successModal.classList.add('hidden');
+  document.removeEventListener('keydown', closeSuccessModalOnEscape);
 }
 
 function closeErrorModalOnEscape(evt) {

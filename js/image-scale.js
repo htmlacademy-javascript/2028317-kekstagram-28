@@ -7,7 +7,7 @@ const increaseButton = document.querySelector('.scale__control--bigger');
 const scalableImage = document.querySelector('.img-upload__preview img');
 
 function resetScaleToDefault() {
-  applyScaleToImage('100%');
+  applyScaleToImage(1);
   scaleValue.value = '100%';
 }
 
