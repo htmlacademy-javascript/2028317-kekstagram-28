@@ -41,33 +41,33 @@ window.addEventListener('load', () => {
       method: 'POST',
       body: new FormData(uploadedImageForm)
     })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-
-      return Promise.reject();
-    })
-    .then(() => {
-      resetScaleToDefault();
-      resetFilterToDefault();
-      handleModalClose();
-      resetFields();
-      document.body.appendChild(successModal);
-      successModalButton.addEventListener('click', closeSuccessModal);
-      document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Escape') {
-          evt.preventDefault();
-          closeSuccessModal();
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         }
+
+        return Promise.reject();
+      })
+      .then(() => {
+        resetScaleToDefault();
+        resetFilterToDefault();
+        handleModalClose();
+        resetFields();
+        document.body.appendChild(successModal);
+        successModalButton.addEventListener('click', closeSuccessModal);
+        document.addEventListener('keydown', (evt) => {
+          if (evt.key === 'Escape') {
+            evt.preventDefault();
+            closeSuccessModal();
+          }
+        });
+      })
+      .catch(() => {
+        document.body.appendChild(errorModal);
+        errorModal.classList.remove('hidden');
+        errorModalButton.addEventListener('click', closeErrorModal);
+        document.addEventListener('keydown', closeErrorModalOnEscape);
       });
-    })
-    .catch(() => {
-      document.body.appendChild(errorModal);
-      errorModal.classList.remove('hidden');
-      errorModalButton.addEventListener('click', closeErrorModal);
-      document.addEventListener('keydown', closeErrorModalOnEscape);
-    })
   });
 });
 
