@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://unpkg.com/nouislider@14.6.3/distribute/nouislider.min.css">
+  <script type="module" src="js/main.js"></script>
   <title>Кекстаграм</title>
 </head>
 
@@ -197,6 +198,18 @@
     </div>
   </footer>
 
+  <div class="hidden load-error">
+    <div class="load-error__title">
+      Oops
+    </div>
+    <div class="load-error__description">
+      При загрузке данных произошла ошибка
+    </div>
+    <button class="load-error__button">
+      ОК
+    </button>
+  </div>
+
   <!-- Шаблон изображения случайного пользователя -->
   <template id="picture">
     <a href="#" class="picture">
@@ -236,6 +249,5 @@
 
   <script src="vendor/pristine/pristine.min.js"  type="text/javascript"></script>
   <script src="https://unpkg.com/nouislider@14.6.3/distribute/nouislider.min.js"></script>
-  <script type="module" src="js/main.js"></script>
 </body>
 </html>

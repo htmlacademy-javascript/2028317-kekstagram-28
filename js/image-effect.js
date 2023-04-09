@@ -18,6 +18,12 @@ let selectedFilter = '';
 
 noUiSlider.create(sliderElement, sliderConfig);
 
+function resetFilterToDefault() {
+  sliderContainer.classList.add('hidden');
+  image.removeAttribute('class');
+  image.style.filter = 'none';
+}
+
 function applyFilterToImage(filterValue) {
   image.style.filter = `${selectedFilter}(${filterValue})`;
 }
@@ -123,3 +129,5 @@ sliderElement.noUiSlider.on('update', onSliderUpdate);
 effectButtons.forEach((effect) => {
   effect.addEventListener('click', onChangeEffect);
 });
+
+export { resetFilterToDefault };

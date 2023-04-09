@@ -6,6 +6,11 @@ const decreaseButton = document.querySelector('.scale__control--smaller');
 const increaseButton = document.querySelector('.scale__control--bigger');
 const scalableImage = document.querySelector('.img-upload__preview img');
 
+function resetScaleToDefault() {
+  applyScaleToImage(1);
+  scaleValue.value = '100%';
+}
+
 function applyScaleToImage(scale) {
   scalableImage.style.transform = `scale(${scale})`;
 }
@@ -36,3 +41,5 @@ function increaseScaleValue() {
 
 decreaseButton.addEventListener('click', decreaseScaleValue);
 increaseButton.addEventListener('click', increaseScaleValue);
+
+export { resetScaleToDefault };

@@ -1406,6 +1406,45 @@ main {
   overflow: hidden;
 }
 
+.load-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: linear-gradient(#fbe3e2 50%, white 50%);
+  border-radius: 20px;
+  color: #345067;
+  max-width: 300px;
+}
+
+.load-error__title {
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 95px;
+}
+
+.load-error__description {
+  text-align: center;
+  font-size: 18px;
+  text-transform: none;
+  margin-top: 50px;
+}
+
+.load-error__button {
+  background-color: #ef7172;
+  color: white;
+  padding: 14px 38px;
+  font-size: 20px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+
 .hidden {
   display: none;
 }

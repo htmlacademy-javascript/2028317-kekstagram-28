@@ -1,3 +1,5 @@
+import { resetFilterToDefault } from './image-effect.js';
+import { resetScaleToDefault } from './image-scale.js';
 import { validateHashtag, validateHashtagByContent, validateHashtagByLength, validateHashtagByUnique, validateHashtagsByCount, validateHashtagsByRegex } from './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
@@ -7,8 +9,15 @@ const uploadedImageForm = document.getElementById('upload-select-image');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
-window.onload = function () {
+const successModalTemplate = document.querySelector('#success').content;
+const successModal = successModalTemplate.querySelector('.success');
+const successModalButton = successModal.querySelector('.success__button');
 
+const errorModalTemplate = document.querySelector('#error').content;
+const errorModal = errorModalTemplate.querySelector('.error');
+const errorModalButton = errorModal.querySelector('.error__button');
+
+window.addEventListener('load', () => {
   const pristineConfig = {
     classTo: 'img-upload__field-wrapper',
     errorTextParent: 'img-upload__field-wrapper'
@@ -26,11 +35,35 @@ window.onload = function () {
   pristine.addValidator(commentField, (value) => value.length <= 140, 'Длинна комментария не может составлять больше 140 символов');
 
   uploadedImageForm.addEventListener('submit', (e) => {
-    if (hashtagsInput.value && !pristine.validate()) {
-      e.preventDefault();
+    e.preventDefault();
+    if (pristine.validate()) {
+      fetch('https://28.javascript.pages.academy/kekstagram', {
+        method: 'POST',
+        body: new FormData(uploadedImageForm)
+      })
+        .then((response) => response.ok ? Promise.resolve() : Promise.reject())
+        .then(onSubmitSuccess)
+        .catch(onSubmitError);
     }
   });
-};
+});
+
+function onSubmitSuccess() {
+  resetScaleToDefault();
+  resetFilterToDefault();
+  handleModalClose();
+  resetFields();
+  document.body.appendChild(successModal);
+  successModalButton.addEventListener('click', closeSuccessModal);
+  document.addEventListener('keydown', closeSuccessModalOnEscape);
+}
+
+function onSubmitError() {
+  document.body.appendChild(errorModal);
+  errorModal.classList.remove('hidden');
+  errorModalButton.addEventListener('click', closeErrorModal);
+  document.addEventListener('keydown', closeErrorModalOnEscape);
+}
 
 function closeOnEscape(evt) {
   const fieldsIsFocused = hashtagsInput === document.activeElement || commentField === document.activeElement;
@@ -51,6 +84,38 @@ function handleImageLoad() {
 function handleModalClose() {
   uploadedImageFormWrapper.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  resetScaleToDefault();
+  resetFilterToDefault();
+  resetFields();
+}
+
+function closeSuccessModalOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeSuccessModal();
+  }
+}
+
+function closeSuccessModal() {
+  successModal.classList.add('hidden');
+  document.removeEventListener('keydown', closeSuccessModalOnEscape);
+}
+
+function closeErrorModalOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeErrorModal();
+  }
+}
+
+function closeErrorModal() {
+  errorModal.classList.add('hidden');
+  document.removeEventListener('keydown', closeErrorModalOnEscape);
+}
+
+function resetFields() {
+  hashtagsInput.value = '';
+  commentField.value = '';
   uploadInput.value = '';
 }
 
