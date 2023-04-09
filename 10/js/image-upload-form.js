@@ -37,10 +37,17 @@ window.addEventListener('load', () => {
 
   uploadedImageForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    fetch('https://28.javascript.pages.academy/kekstagram1', {
+    fetch('https://28.javascript.pages.academy/kekstagram', {
       method: 'POST',
       body: new FormData(uploadedImageForm)
     })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        return Promise.reject();
+      })
       .then(() => {
         resetScaleToDefault();
         resetFilterToDefault();
@@ -57,13 +64,9 @@ window.addEventListener('load', () => {
       })
       .catch(() => {
         document.body.appendChild(errorModal);
+        errorModal.classList.remove('hidden');
         errorModalButton.addEventListener('click', closeErrorModal);
-        document.addEventListener('keydown', (evt) => {
-          if (evt.key === 'Escape') {
-            evt.preventDefault();
-            closeErrorModal();
-          }
-        });
+        document.addEventListener('keydown', closeErrorModalOnEscape);
       });
   });
 });
@@ -97,8 +100,16 @@ function closeSuccessModal() {
   successModal.classList.add('hidden');
 }
 
+function closeErrorModalOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeErrorModal();
+  }
+}
+
 function closeErrorModal() {
   errorModal.classList.add('hidden');
+  document.removeEventListener('keydown', closeErrorModalOnEscape);
 }
 
 function resetFields() {
