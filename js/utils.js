@@ -24,3 +24,12 @@ export function photoDescriptions(index) {
     comments: getComments(getRandomNumberFromInterval(0, 5))
   };
 }
+
+export function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
