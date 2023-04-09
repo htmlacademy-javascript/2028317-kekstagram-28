@@ -38,26 +38,24 @@ window.addEventListener('load', () => {
     e.preventDefault();
     if (pristine.validate()) {
       fetch('https://28.javascript.pages.academy/kekstagram', {
-      method: 'POST',
-      body: new FormData(uploadedImageForm)
-    })
-      .then((response) => {
-        return response.ok ? Promise.resolve() : Promise.reject()
+        method: 'POST',
+        body: new FormData(uploadedImageForm)
       })
-      .then(onSubmitSuccess)
-      .catch(onSubmitError);
+        .then((response) => response.ok ? Promise.resolve() : Promise.reject())
+        .then(onSubmitSuccess)
+        .catch(onSubmitError);
     }
   });
 });
 
 function onSubmitSuccess() {
-    resetScaleToDefault();
-    resetFilterToDefault();
-    handleModalClose();
-    resetFields();
-    document.body.appendChild(successModal);
-    successModalButton.addEventListener('click', closeSuccessModal);
-    document.addEventListener('keydown', closeSuccessModalOnEscape);
+  resetScaleToDefault();
+  resetFilterToDefault();
+  handleModalClose();
+  resetFields();
+  document.body.appendChild(successModal);
+  successModalButton.addEventListener('click', closeSuccessModal);
+  document.addEventListener('keydown', closeSuccessModalOnEscape);
 }
 
 function onSubmitError() {
