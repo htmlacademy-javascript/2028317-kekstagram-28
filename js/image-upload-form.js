@@ -17,6 +17,8 @@ const errorModalTemplate = document.querySelector('#error').content;
 const errorModal = errorModalTemplate.querySelector('.error');
 const errorModalButton = errorModal.querySelector('.error__button');
 
+const image = document.querySelector('.img-upload__preview img');
+
 window.addEventListener('load', () => {
   const pristineConfig = {
     classTo: 'img-upload__field-wrapper',
@@ -74,7 +76,9 @@ function closeOnEscape(evt) {
   }
 }
 
-function handleImageLoad() {
+function handleImageLoad(event) {
+  const file = event.target.files[0];
+  image.src = URL.createObjectURL(file);
   uploadedImageFormWrapper.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', closeOnEscape);
