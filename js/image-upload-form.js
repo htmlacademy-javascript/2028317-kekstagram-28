@@ -41,30 +41,33 @@ window.addEventListener('load', () => {
       method: 'POST',
       body: new FormData(uploadedImageForm)
     })
-      .then(() => {
-        resetScaleToDefault();
-        resetFilterToDefault();
-        handleModalClose();
-        resetFields();
-        document.body.appendChild(successModal);
-        successModalButton.addEventListener('click', closeSuccessModal);
-        document.addEventListener('keydown', (evt) => {
-          if (evt.key === 'Escape') {
-            evt.preventDefault();
-            closeSuccessModal();
-          }
-        });
-      })
-      .catch(() => {
-        document.body.appendChild(errorModal);
-        errorModalButton.addEventListener('click', closeErrorModal);
-        document.addEventListener('keydown', (evt) => {
-          if (evt.key === 'Escape') {
-            evt.preventDefault();
-            closeErrorModal();
-          }
-        });
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+
+      return Promise.reject();
+    })
+    .then(() => {
+      resetScaleToDefault();
+      resetFilterToDefault();
+      handleModalClose();
+      resetFields();
+      document.body.appendChild(successModal);
+      successModalButton.addEventListener('click', closeSuccessModal);
+      document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape') {
+          evt.preventDefault();
+          closeSuccessModal();
+        }
       });
+    })
+    .catch(() => {
+      document.body.appendChild(errorModal);
+      errorModal.classList.remove('hidden');
+      errorModalButton.addEventListener('click', closeErrorModal);
+      document.addEventListener('keydown', closeErrorModalOnEscape);
+    })
   });
 });
 
@@ -97,10 +100,16 @@ function closeSuccessModal() {
   successModal.classList.add('hidden');
 }
 
+function closeErrorModalOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closeErrorModal();
+  }
+}
+
 function closeErrorModal() {
   errorModal.classList.add('hidden');
-  uploadInput.value = '';
-  document.removeEventListener('keydown');
+  document.removeEventListener('keydown', closeErrorModalOnEscape);
 }
 
 function resetFields() {
