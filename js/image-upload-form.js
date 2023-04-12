@@ -8,6 +8,7 @@ const closeButton = document.querySelector('#upload-cancel');
 const uploadedImageForm = document.getElementById('upload-select-image');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
+const originalRadioButton = document.getElementById('effect-none');
 
 const successModalTemplate = document.querySelector('#success').content;
 const successModal = successModalTemplate.querySelector('.success');
@@ -56,6 +57,7 @@ function onSubmitSuccess() {
   handleModalClose();
   resetFields();
   document.body.appendChild(successModal);
+  successModal.classList.remove('hidden');
   successModalButton.addEventListener('click', closeSuccessModal);
   document.addEventListener('keydown', closeSuccessModalOnEscape);
 }
@@ -121,6 +123,7 @@ function resetFields() {
   hashtagsInput.value = '';
   commentField.value = '';
   uploadInput.value = '';
+  originalRadioButton.checked = true;
 }
 
 uploadInput.addEventListener('change', handleImageLoad);

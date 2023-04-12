@@ -26,10 +26,10 @@ const filterImages = debounce((filterType, images) => {
       prepareImages(images);
       break;
     case 'random':
-      prepareImages(images.sort(() => 0.5 - Math.random()).slice(0, RANDOM_IMAGES_COUNT));
+      prepareImages([...images].sort(() => 0.5 - Math.random()).slice(0, RANDOM_IMAGES_COUNT));
       break;
     case 'discussed':
-      prepareImages(images.sort((a, b) => b.comments.length - a.comments.length));
+      prepareImages([...images].sort((a, b) => b.comments.length - a.comments.length));
       break;
   }
 }, FILTER_DEBOUNCE_DELAY);
