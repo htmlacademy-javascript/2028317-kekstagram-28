@@ -72,7 +72,7 @@ function onSubmitError() {
 function closeOnEscape(evt) {
   const fieldsIsFocused = hashtagsInput === document.activeElement || commentField === document.activeElement;
 
-  if (evt.key === 'Escape' && !fieldsIsFocused) {
+  if (evt.key === 'Escape' && !fieldsIsFocused && errorModal.classList.contains('hidden')) {
     evt.preventDefault();
     handleModalClose();
   }
