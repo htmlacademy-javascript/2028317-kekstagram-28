@@ -11,6 +11,7 @@ const sliderConfig = {
     min: 0,
     max: 1
   },
+  connect: 'lower',
   start: 1,
   step: 0.1
 };
@@ -53,6 +54,7 @@ function onChangeEffect(event) {
           min: 0,
           max: 1
         },
+        connect: 'lower',
         start: 1,
         step: 0.1,
         format: {
@@ -68,6 +70,7 @@ function onChangeEffect(event) {
           min: 0,
           max: 1
         },
+        connect: 'lower',
         start: 1,
         step: 0.1,
         format: {
@@ -83,6 +86,7 @@ function onChangeEffect(event) {
           min: 0,
           max: 100
         },
+        connect: 'lower',
         start: 100,
         step: 1,
         format: {
@@ -98,6 +102,7 @@ function onChangeEffect(event) {
           min: 0,
           max: 3
         },
+        connect: 'lower',
         start: 3,
         step: 0.1,
         format: {
@@ -113,6 +118,7 @@ function onChangeEffect(event) {
           min: 1,
           max: 3
         },
+        connect: 'lower',
         start: 3,
         step: 0.1,
         format: {
