@@ -8,7 +8,7 @@ const scalableImage = document.querySelector('.img-upload__preview img');
 
 function resetScaleToDefault() {
   applyScaleToImage(1);
-  scaleValue.value = '100%';
+  scaleValue.value = `${MAXIMUM_SCALE_VALUE}%`;
 }
 
 function applyScaleToImage(scale) {
@@ -18,11 +18,7 @@ function applyScaleToImage(scale) {
 function decreaseScaleValue() {
   const currentValue = parseFloat(scaleValue.value);
 
-  if (currentValue - SCALE_CHANGE_STEP < MINIMUM_SCALE_VALUE) {
-    scaleValue.value = '25%';
-  } else {
-    scaleValue.value = `${currentValue - SCALE_CHANGE_STEP}%`;
-  }
+  scaleValue = currentValue - SCALE_CHANGE_STEP < MINIMUM_SCALE_VALUE ? `${MINIMUM_SCALE_VALUE}%` : `${currentValue - SCALE_CHANGE_STEP}%`;
 
   applyScaleToImage(parseFloat(scaleValue.value) / 100);
 }
@@ -30,11 +26,7 @@ function decreaseScaleValue() {
 function increaseScaleValue() {
   const currentValue = parseFloat(scaleValue.value);
 
-  if (currentValue + SCALE_CHANGE_STEP > MAXIMUM_SCALE_VALUE) {
-    scaleValue.value = '100%';
-  } else {
-    scaleValue.value = `${currentValue + SCALE_CHANGE_STEP}%`;
-  }
+  scaleValue.value = currentValue + SCALE_CHANGE_STEP > MAXIMUM_SCALE_VALUE ? `${MAXIMUM_SCALE_VALUE}%` : `${currentValue + SCALE_CHANGE_STEP}%`;
 
   applyScaleToImage(parseFloat(scaleValue.value) / 100);
 }
