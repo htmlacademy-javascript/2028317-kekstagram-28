@@ -18,7 +18,7 @@ function applyScaleToImage(scale) {
 function decreaseScaleValue() {
   const currentValue = parseFloat(scaleValue.value);
 
-  scaleValue = currentValue - SCALE_CHANGE_STEP < MINIMUM_SCALE_VALUE ? `${MINIMUM_SCALE_VALUE}%` : `${currentValue - SCALE_CHANGE_STEP}%`;
+  scaleValue.value = currentValue - SCALE_CHANGE_STEP < MINIMUM_SCALE_VALUE ? `${MINIMUM_SCALE_VALUE}%` : `${currentValue - SCALE_CHANGE_STEP}%`;
 
   applyScaleToImage(parseFloat(scaleValue.value) / 100);
 }
